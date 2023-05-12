@@ -1,0 +1,28 @@
+{
+  "name": "midatoitu",
+  "version": "1.0.0",
+  "description": "bc",
+  "main": "app.js",
+  "scripts": {
+    "devStart": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IKarinI/MidaToitu2.0.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IKarinI/MidaToitu2.0/issues"
+  },
+  "homepage": "https://github.com/IKarinI/MidaToitu2.0#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.40.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "nodemon": "^2.0.22"
+  }
+}
