@@ -1,5 +1,6 @@
 const retseptid = [
   {
+    id: 1,
     retseptiNimi: 'Mozzarella saiad',
     koostisosadeNimekiri: [
       '8 viilu röstsaia',
@@ -14,6 +15,7 @@ const retseptid = [
     pilt: 'pildid/mozsai.jpg',
   },
   {
+    id: 2,
     retseptiNimi: 'Lõhesupp',
     koostisosadeNimekiri: [
       '3 kartulit',
@@ -31,6 +33,7 @@ const retseptid = [
     pilt: 'pildid/lohesupp.jpg',
   },
   {
+    id: 3,
     retseptiNimi: 'Avokaado-kodujuustusalat',
     koostisosadeNimekiri: [
       '1 avokaado',
@@ -46,6 +49,7 @@ const retseptid = [
     pilt: 'pildid/avokaadosalat.jpg',
   },
   {
+    id: 4,
     retseptiNimi: 'Kartuli-porgandikotletid',
     koostisosadeNimekiri: [
       '3-4 kartulit',
@@ -65,6 +69,7 @@ const retseptid = [
     pilt: 'pildid/porkotletid.jpg',
   },
   {
+    id: 5,
     retseptiNimi: 'Kartuli-kodujuustu pulgad',
     koostisosadeNimekiri: [
       '5 keedukartulit',
@@ -80,6 +85,7 @@ const retseptid = [
     pilt: 'pildid/kartulipulgad.jpg',
   },
   {
+    id: 6,
     retseptiNimi: 'Ahjulõhe muna-juustu kattega',
     koostisosadeNimekiri: [
       '700-800 g tükk lõhefileed',
@@ -93,6 +99,7 @@ const retseptid = [
     pilt: 'pildid/ahjulohe.jpg',
   },
   {
+    id: 7,
     retseptiNimi: 'Õhukesed pannkoogid ehk krepid',
     koostisosadeNimekiri: [
       '4 muna',
@@ -108,6 +115,7 @@ const retseptid = [
     pilt: 'pildid/krepid.jpg',
   },
   {
+    id: 8,
     retseptiNimi: 'Banaanipannkoogid',
     koostisosadeNimekiri: [
       '2 tumedaks läinud pehmet banaani',
@@ -124,6 +132,7 @@ const retseptid = [
     pilt: 'pildid/banaanikook.jpg',
   },
   {
+    id: 9,
     retseptiNimi: 'Krutskiga viineripirukad',
     koostisosadeNimekiri: [
       '10 viilu röstsaia',
@@ -138,6 +147,7 @@ const retseptid = [
     pilt: 'pildid/viineripirukas.jpg',
   },
   {
+    id: 10,
     retseptiNimi: 'Kanakaste sulatatud juustuga',
     koostisosadeNimekiri: [
       '2 suuremat kanafileed',
@@ -152,6 +162,7 @@ const retseptid = [
     pilt: 'pildid/kanakastejuustuga.jpg',
   },
   {
+    id: 11,
     retseptiNimi: 'Krõbedad kanapalad tillikastmega',
     koostisosadeNimekiri: [
       '2 kanafileed',
@@ -165,6 +176,7 @@ const retseptid = [
     pilt: 'pildid/kanapulgad.jpg',
   },
   {
+    id: 12,
     retseptiNimi: 'Porgandi-munavõie',
     koostisosadeNimekiri: [
       '4 keedetud muna',
@@ -180,6 +192,7 @@ const retseptid = [
     pilt: 'pildid/munavoie.jpg',
   },
   {
+    id: 13,
     retseptiNimi: 'Avokaado-munasalat',
     koostisosadeNimekiri: [
       '2 küpset avokaadot',
@@ -194,6 +207,7 @@ const retseptid = [
     pilt: 'pildid/avomunasalat.jpg',
   },
   {
+    id: 14,
     retseptiNimi: 'Täidetud viinerid',
     koostisosadeNimekiri: [
       '2 kartulit',
@@ -216,6 +230,7 @@ const retseptid = [
     pilt: 'pildid/viinerid.jpg',
   },
   {
+    id: 15,
     retseptiNimi: 'Kartuli-küüslaugupuder',
     koostisosadeNimekiri: [
       '1 kg kartuleid',
@@ -230,6 +245,7 @@ const retseptid = [
     pilt: 'pildid/kartulipuder.jpg',
   },
   {
+    id: 16,
     retseptiNimi: 'Redise-porgandisupp',
     koostisosadeNimekiri: [
       '2 kartulit',

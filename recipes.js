@@ -1,3 +1,5 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable prefer-const */
 let recipes = [];
 
 const initStudents = (dataToInit) => {
@@ -13,4 +15,34 @@ function getRecipeById(number) {
   return null;
 }
 
-module.exports = { getRecipeById, initStudents };
+function getAllRecipes() {
+  return recipes;
+}
+
+function getSuitableRecipes(results) {
+  let missingItems = [];
+  let recipesToShow = [];
+  const obj = {};
+  if (results === []) {
+    recipesToShow = getAllRecipes();
+  } else {
+    for (let i = 0; i < recipes.length; i++) { // Iga retsept
+      for (let j = 0; j < recipes[i].koostisosad.length; j++) {
+      // Iga element retsepti koostisosade listis
+        if (results.includes(recipes[i].koostisosad[j]) === false) {
+          missingItems.push(recipes[i].koostisosad[j]);
+        }
+      }
+      if (missingItems.length <= 3) {
+        obj.recipeId = recipes.id;
+        obj.noItemsList = missingItems;
+        recipesToShow.push(obj);
+      }
+    }
+  }
+  return recipesToShow;
+}
+
+module.exports = {
+  getRecipeById, initStudents, getAllRecipes, getSuitableRecipes,
+};
