@@ -31,7 +31,9 @@ Ilma < p >, kui kuvab kõik retseptid, siis pealkirjaks jääb justkui lehel ole
 
  Mul on lehele tulles kasutaja input massiiv, mis sisaldab kasutaja valikuid või on tühi. Mul on ligipääs retsptide nimekirjale, neid pean omavahel võrdlema, et sobivad leida. 
 
- Kasutajale kuvamiseks on mul vaja teada, et kas asi läheb retseptitabel1 või retseptitabel2 alla või jääb ilma pealkirjata niisama. Funktsioonis ära töödeldud info peaks sisaldama retsepti id, nimekirja asjadest, mis oli puudu (selle nimekirja pikkusest saab ka retsepti sobivuse, mida lühem nimekiri, seda sobivam - kuvatakse eespool?).  
+ Kasutajale kuvamiseks on mul vaja teada, et kas asi läheb retseptitabel1 või retseptitabel2 alla või jääb ilma pealkirjata niisama. Funktsioonis ära töödeldud info peaks sisaldama retsepti id, nimekirja asjadest, mis oli puudu (selle nimekirja pikkusest saab ka retsepti sobivuse, mida lühem nimekiri, seda sobivam - need kuvatakse eespool?).
+ 
+   
 
 getSuitableRecipes - kontrollin iga retsepti [ recipes.length ] kohta, et kas selle koostisosade massiivi iga element[ recipes[ i ].koostisosad.length] sisaldub [  includes() ] tulemuste lists
 

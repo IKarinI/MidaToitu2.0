@@ -7,6 +7,10 @@ const initStudents = (dataToInit) => {
   return recipes;
 };
 
+function sorting(arrayOfObjects,atribute) {
+  arrayOfObjects.sort((a, b) => a.atribute - b.atribute);
+}
+
 function getRecipeById(number) {
   if (number <= recipes.length && number > -1) {
     // eslint-disable-next-line no-const-assign
@@ -25,9 +29,14 @@ function getSuitableRecipes(results) {
   let obj = {};
   // if (results === []) { See võrdlus ei pruugi töötada
   if (results.length < 1) {
-    recipesToShow = getAllRecipes();
+    for (let i = 0; i < recipes.length - 1; i++) {
+      obj = {};
+      obj.recipeId = recipes[i].id;
+      obj.noItemsList = [];
+      recipesToShow.push(obj);
+    }
   } else {
-    for (let i = 0; i < recipes.length; i++) { // Iga retsept
+    for (let i = 0; i < recipes.length - 1; i++) { // Iga retsept
       missingItems = [];
       obj = {};
       for (let j = 0; j < recipes[i].koostisosad.length; j++) {
@@ -43,11 +52,19 @@ function getSuitableRecipes(results) {
         // obj.noItemsList = [missingItems];
         // eslint-disable-next-line max-len
         // sellega omistad viite sellele originaalmassiivile ja kui seda muudad siis muutub ka objekti sees
-        obj.noItemsList = [missingItems];
+        // Teen siia tsükli, sest muidu teeb [[list]]
+        // obj.noItemsList = [missingItems];
+        obj.noItemsList = [];
+        for (let j = 0; j < missingItems.length; j++) {
+          obj.noItemsList.push(missingItems[j]);
+        }
         recipesToShow.push(obj);
+        // Sortingu jaoks on vaja seda listi pikkust objekti kylge
+        obj.missingItemsListLen = missingItems.length;
       }
     }
   }
+  recipesToShow = recipesToShow.sort((a, b) => a.missingItemsListLen - b.missingItemsListLen);
   return recipesToShow;
 }
 

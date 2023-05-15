@@ -41,15 +41,32 @@ const footer = `
   </html>`;
 
 app.get('/retseptid', (req, res) => {
-  const allRecipesSmall = recipes.getAllRecipes();
-
-
-  let response = 
-  `${header('sisu')}<div class="sisu">
+  const results = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 22, 23, 26, 2, 72, 6];
+  const suitableRecipes = recipes.getSuitableRecipes(results);
+  let response = `${header('Retseptid')}<div class="sisu">
   <div class="lehepealkiri">
     <h1>Retseptid</h1>
+  </div>`;
+  // Siin, mul topelt kontroll samale asjale, Kõigepealt funktsioonis sees ja siis siin
+  // eslint-disable-next-line max-len
+  // Peaks funktsiooni kontrolli koha pealt jagama kaheks, peale seda kontrolli siin suunab vstava funktsiooni juurde.
+  if (results.length < 1) {
+    response
+  += `
+  <div class="retseptitabel2">
+  <div class="vretseptikast" id="1">
+  <div class="sretseptikast">
+  <img src="pildid/lohesupp.jpg">
+  <div class="toiduNimetus">Lõhesupp</div>
+  <div class="retseptiAsjad">Sul on puudu: porgand, porru, vahukoor</div>
+  <div class="vaataRetsepti" id="1">Vaata Retsepti</div>
   </div>
-  <div class="tekst">
+  </div>
+  </div>
+  </div>`;
+  } else {
+    response
+  += `<div class="tekst">
     <p>Nende retseptide jaoks on kõik koostisosad olemas:</p>
   </div>
   <div class="retseptitabel1">
@@ -67,13 +84,16 @@ app.get('/retseptid', (req, res) => {
   <div class="retseptitabel2">
   <div class="vretseptikast" id="1">
   <div class="sretseptikast">
-  <img src="pildid/lohesupp.jpg"><div class="toiduNimetus">Lõhesupp</div>
-  <div class="retseptiAsjad">
-  Sul on puudu: porgand, porru, vahukoor</div>
-  <div class="vaataRetsepti" id="1">Vaata Retsepti</div></div></div></div>
-  
-</div>
-${footer}`;
+  <img src="pildid/lohesupp.jpg">
+  <div class="toiduNimetus">Lõhesupp</div>
+  <div class="retseptiAsjad">Sul on puudu: porgand, porru, vahukoor</div>
+  <div class="vaataRetsepti" id="1">Vaata Retsepti</div>
+  </div>
+  </div>
+  </div>
+  </div>`;
+  }
+  response += `${footer}`;
   return res.send(response);
 });
 
