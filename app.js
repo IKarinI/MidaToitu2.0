@@ -14,12 +14,12 @@ const ingredients = require('./ingredients');
 
 const recipes = require('./recipes');
 
-const port = 5000;
+const port = 3000;
 
 recipes.initStudents(allRecipes);
 
-// eslint-disable-next-line no-undef
 
+// eslint-disable-next-line no-undef
 
 const header = (heading) => `
 <!DOCTYPE html>
@@ -43,7 +43,7 @@ const footer = `
   </html>`;
 
 app.get('/retseptid', (req, res) => {
-  const results = [];
+  const results = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 22, 23, 26, 2, 72, 6];
   let response = `${header('Retseptid')}<div class="sisu">
   <div class="lehepealkiri">
     <h1>Retseptid</h1>
@@ -70,41 +70,55 @@ app.get('/retseptid', (req, res) => {
     }
   } else {
     const suitableRecipes = recipes.getSuitableRecipes(results);
+    let smallHeadingCount=0;
     for (let i = 0; i < suitableRecipes.length - 1; i++) {
       if (suitableRecipes[i].noItemsList.length < 1){
-        response += `<div class="tekst">
+        if (smallHeadingCount === 0){
+          smallHeadingCount++;
+          response += `<div class="tekst">
           <p>Nende retseptide jaoks on kõik koostisosad olemas:</p>
           </div>
-          <div class="retseptitabel1">
-          <div class="vretseptikast" id="${allRecipes[i].id}">
-          <div class="sretseptikast">
-          <img src="/${allRecipes[i].pilt}">
-          <div class="toiduNimetus">${allRecipes[i].retseptiNimi}</div>
-          <div class="retseptiAsjad">Koostisosad:<div class="koostisosad">`
-        for (let j = 0; j < allRecipes[i].koostisosad.length - 1; j++) {
-          response += ` 
-                  ${allRecipes[i].koostisosadeNimekiri[j]},`;
+          <div class="retseptitabel1">`;
         }
-        response +=
-          `</div>
-          <div class="vaataRetsepti" id="${suitableRecipes[i].id}">Vaata Retsepti</div></div></div></div>`
-      } else {
+        response += `
+          <div class="vretseptikast" id="${allRecipes[suitableRecipes[i].id].id}">
+          <div class="sretseptikast">
+          <img src="/${allRecipes[suitableRecipes[i].id].pilt}">
+          <div class="toiduNimetus">${allRecipes[suitableRecipes[i].id].retseptiNimi}</div>
+          <div class="retseptiAsjad">Koostisosad:<div class="koostisosad">`;
+        for (let j = 0; j < allRecipes[suitableRecipes[i].id].koostisosad.length - 1; j++) {
+          for (let k = 0; k < ingredients.length - 1; k++) {
+            if (allRecipes[suitableRecipes[i].id].koostisosad[j] === ingredients[k].id){
+              response += ` 
+                    ${ingredients[k].Nimetus},`;
+            }
+          }
+        }
         response
+          += `</div>
+          <div class="vaataRetsepti" id="${allRecipes[suitableRecipes[i].id].id}">Vaata Retsepti</div></div></div></div>`;
+      } else {
+        if (smallHeadingCount === 1){
+          smallHeadingCount++;
+          response
           += `<div class="tekst">
           <p>Sulle võivad huvi pakkuda järgmised retseptid:</p>
           </div>
-          <div class="retseptitabel2">
-          <div class="vretseptikast" id="${allRecipes[i].id}">
+          <div class="retseptitabel2">`;
+        }
+        response
+          += `
+          <div class="vretseptikast" id="${allRecipes[suitableRecipes[i].id].id}">
           <div class="sretseptikast">
-          <img src="/${allRecipes[i].pilt}">
-          <div class="toiduNimetus">${allRecipes[i].retseptiNimi}</div>
+          <img src="/${allRecipes[suitableRecipes[i].id].pilt}">
+          <div class="toiduNimetus">${allRecipes[suitableRecipes[i].id].retseptiNimi}</div>
           <div class="retseptiAsjad">Sul on puudu:`;
-        for (let j = 0; j < suitableRecipes[i].missingItems.length - 1; j++) {
+        for (let j = 0; j < (suitableRecipes[i].missingItemslistLen) - 1; j++) {
           response += `
               <div class="koostisosad">${suitableRecipes[i].koostisosadeNimekiri[j]}</div>`;
         }
         response += `</div>
-        <div class="vaataRetsepti" id="${suitableRecipes[i].id}">Vaata Retsepti</div>
+        <div class="vaataRetsepti" id="${allRecipes[suitableRecipes[i].id].id}">Vaata Retsepti</div>
         </div>
         </div>
         </div>

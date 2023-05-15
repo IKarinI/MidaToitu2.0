@@ -35,3 +35,9 @@ Ilma < p >, kui kuvab kõik retseptid, siis pealkirjaks jääb justkui lehel ole
 
 getSuitableRecipes - kontrollin iga retsepti [ recipes.length ] kohta, et kas selle koostisosade massiivi iga element[ recipes[ i ].koostisosad.length] sisaldub [  includes() ] tulemuste lists.
 
+230515-
+Leht /retseptid kontrollib kõigepealt, et kas sisse tulev kasutaja input toiduainetest on tühi. Kui on tühi ehk kasutaja ei küsi midagi konkreetset, siis pöördub getAllRecipes, Kui kasutaja on mingid asjad valinud, siis pöördub getSuitableRecipes. See viimane funktsioon tagastab retseptide massiivi asemel uue massiivi, mis koosneb retsepti id'st, puuduvate toiduainete nimekirja ja et mitu asja on nimekirjas ( vajalik objektide masiivi sorteerimiseks enne lehele andmist ). /retseptid peaks selle massiivi puhul lehele kuvades pöörduma andmete kuvamiseks resteptilisti, mitte tagastatud retseptide nimekirja itereerimisel tekkiva numbri kaudu, vaid selle iteratsiooni sees oleva id kaudu.
+Kasutan allRecipes elemendi pööle pöördumiseks suitableRecipes hetkel käes oleva elemendi id atribuuti `${allRecipes[suitableRecipes[i].id].id}` 
+
+Hiljem ümber teha:
+Lihtsam oleks funktsiooni lõpus tagastada Kõik sobivate retseptide andmed, lisades siis sinna juurde puuduvate toiduainete atribuudi ja selle listi pikkuse.

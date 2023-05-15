@@ -7,10 +7,6 @@ const initStudents = (dataToInit) => {
   return recipes;
 };
 
-function sorting(arrayOfObjects,atribute) {
-  arrayOfObjects.sort((a, b) => a.atribute - b.atribute);
-}
-
 function getRecipeById(number) {
   if (number <= recipes.length && number > -1) {
     // eslint-disable-next-line no-const-assign
@@ -48,7 +44,7 @@ function getSuitableRecipes(results) {
       }
     }
     if (missingItems.length <= 3) {
-      obj.recipeId = recipes[i].id;
+      obj.id = recipes[i].id;
       // obj.noItemsList = [missingItems];
       // eslint-disable-next-line max-len
       // sellega omistad viite sellele originaalmassiivile ja kui seda muudad siis muutub ka objekti sees
