@@ -82,7 +82,12 @@ function searchIngredients(ingredients, query) {
   return ingredients.filter(condition);
 }
 
+function searchDirections() {
+  let t = document.getElementById("myInput");
+  location.href = `/otsing?t=${t}`;
+}
+
 module.exports = {
   // eslint-disable-next-line max-len
-  getRecipeById, initStudents, getAllRecipes, getSuitableRecipes, searchIngredients, getIngredients, initIngredients,
+  getRecipeById, initStudents, getAllRecipes, getSuitableRecipes, searchIngredients, getIngredients, initIngredients, searchDirections,
 };

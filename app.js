@@ -16,6 +16,9 @@ const recipes = require('./recipes');
 
 const port = 5000;
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 recipes.initStudents(allRecipes);
 recipes.initIngredients(ingredients);
 
@@ -63,7 +66,7 @@ app.get('/retseptid', (req, res) => {
       <div class="sretseptikast">
       <img src="/${suitableRecipes[i].pilt}">
       <div class="toiduNimetus">${suitableRecipes[i].retseptiNimi}</div>
-      <div class="vaataRetsepti" id="${suitableRecipes[i].id}">Vaata Retsepti</div>
+      <button class="vaataRetsepti" id="${suitableRecipes[i].id}" onClick="location.href = 'retseptid/${suitableRecipes[i].id}';">Vaata Retsepti</button>
       </div>
       </div>
       </div>
@@ -97,7 +100,8 @@ app.get('/retseptid', (req, res) => {
         }
         response
           += `</div>
-          <div class="vaataRetsepti" id="${allRecipes[suitableRecipes[i].id].id}">Vaata Retsepti</div></div></div></div>`;
+          <button class="vaataRetsepti" id="${allRecipes[suitableRecipes[i].id].id}" onClick="location.href = 'retseptid/${suitableRecipes[i].id}';">Vaata Retsepti</button>
+          </div></div></div>`;
       } else {
         if (smallHeadingCount === 1){
           smallHeadingCount++;
@@ -134,9 +138,28 @@ app.get('/retseptid', (req, res) => {
 app.get('/otsing', (req, res) => {
   let insideTheBox = '';
   let suitableIngredients = recipes.getIngredients();
+  let chosenIngredientsList = [
+    { id: 1, Nimetus: 'avokaado' },
+    { id: 2, Nimetus: 'banaan' },
+    { id: 3, Nimetus: 'basiilik/petersell' },
+    { id: 4, Nimetus: 'hapukoor' },
+    { id: 5, Nimetus: 'jahu' },
+    { id: 7, Nimetus: 'kana' },
+    { id: 8, Nimetus: 'kartul' },
+    { id: 11, Nimetus: 'küüslauk' },
+    { id: 13, Nimetus: 'majonees/ketšup' },
+    { id: 14, Nimetus: 'muna' },
+    { id: 15, Nimetus: 'murulauk' },
+    { id: 18, Nimetus: 'porgand' },
+    { id: 22, Nimetus: 'riivsai' },
+    { id: 23, Nimetus: 'sai' },
+    { id: 27, Nimetus: 'sulajuust' },
+    { id: 30, Nimetus: 'vahukoor' },
+  ];
   if (Object.keys(req.query).length > 0){
     insideTheBox = req.query.t;
     suitableIngredients = recipes.searchIngredients(ingredients, insideTheBox);
+    // chosenIngredientsList=[];
   }
   let response = `${header('Retseptide otsing')}<div class="sisu">
   <div class="pealkiri">
@@ -146,7 +169,7 @@ app.get('/otsing', (req, res) => {
     <div class="topnav">
       <form class="search-container">
         <span class="icon"><i class="fa fa-search icon fa-lg"></i></span>
-        <input autocomplete="off" type="text" id="myInput" onkeyup="otsinguFunktioon()" placeholder="Otsing..." name="search">
+        <input autocomplete="off" type="text" id="myInput" onkeyup="searchDirections" placeholder="Otsing..." name="search">
       </form>
     </div>
 
@@ -154,7 +177,7 @@ app.get('/otsing', (req, res) => {
       <div id="nupud">`;
   for (let i = 0; i < suitableIngredients.length; i++) {
     response
-    += `<button class="nupud" id="${suitableIngredients[i].id}">${suitableIngredients[i].Nimetus}</button>`;
+    += `<button class="nupud" id="${suitableIngredients[i].id}" onClick="addTOChosenList()">${suitableIngredients[i].Nimetus}</button>`;
   }
 
   response += `
@@ -168,7 +191,12 @@ app.get('/otsing', (req, res) => {
         <div class="second" id="second">
           <p>Sinu valikud:</p>
           <a class="otsinupp">Otsi retsepti</a>
-        </div>
+        </div>`;
+  for (let j = 0; j < chosenIngredientsList.length - 1; j++){
+    response += `      
+          <div class="nimekirjaElemendid">${chosenIngredientsList[j].Nimetus}</div>`;
+  }
+  response += `
       </div>
     </div>
   </div>
