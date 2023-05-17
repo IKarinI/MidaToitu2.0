@@ -1,10 +1,16 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable prefer-const */
 let recipes = [];
+let ingredients = [];
 
 const initStudents = (dataToInit) => {
   recipes = dataToInit;
   return recipes;
+};
+
+const initIngredients = (dataToInit) => {
+  ingredients = dataToInit;
+  return ingredients;
 };
 
 function getRecipeById(number) {
@@ -17,6 +23,10 @@ function getRecipeById(number) {
 
 function getAllRecipes() {
   return recipes;
+}
+
+function getIngredients() {
+  return ingredients;
 }
 
 function getSuitableRecipes(results) {
@@ -64,6 +74,15 @@ function getSuitableRecipes(results) {
   return recipesToShow;
 }
 
+function searchIngredients(ingredients, query) {
+  function condition(element) {
+    let el = element.Nimetus;
+    return el.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+  }
+  return ingredients.filter(condition);
+}
+
 module.exports = {
-  getRecipeById, initStudents, getAllRecipes, getSuitableRecipes,
+  // eslint-disable-next-line max-len
+  getRecipeById, initStudents, getAllRecipes, getSuitableRecipes, searchIngredients, getIngredients, initIngredients,
 };

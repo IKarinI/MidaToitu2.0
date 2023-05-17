@@ -41,3 +41,12 @@ Kasutan allRecipes elemendi pööle pöördumiseks suitableRecipes hetkel käes 
 
 Hiljem ümber teha:
 Lihtsam oleks funktsiooni lõpus tagastada Kõik sobivate retseptide andmed, lisades siis sinna juurde puuduvate toiduainete atribuudi ja selle listi pikkuse.
+
+230517- 
+Otsingulehekülje arendus:
+Loon searchIngredients funktsiooni, mis võtab argumendina massiivi ja otsingukasti sisestatu ja filtreerib sisestatud info alusel massiivi. Selle saadud massiivi elemendid kuvatakse ekraanile nuppudena.
+
+Folter() meetodi kasutamine osutus lõpuks raskemaks, kui ma alguses arvasin. Tegin seda mitu korda ümber, kuna andis errorit, et sellist funktsiooni ei leia. Lõpuks avastasin, et kuna ma olin [filter meetodi](https://www.programiz.com/javascript/library/array/filter) koodi kopeerinud, oin unustanud, et enda projektis pean ma selle poole pöördumiseks kasutama selle ees recipes.searchIngredients.  
+
+http://localhost:5000/otsing?t=a
+Kui ühte nuppudest vajutada, võetakse selle i

@@ -14,9 +14,10 @@ const ingredients = require('./ingredients');
 
 const recipes = require('./recipes');
 
-const port = 3000;
+const port = 5000;
 
 recipes.initStudents(allRecipes);
+recipes.initIngredients(ingredients);
 
 
 // eslint-disable-next-line no-undef
@@ -70,7 +71,7 @@ app.get('/retseptid', (req, res) => {
     }
   } else {
     const suitableRecipes = recipes.getSuitableRecipes(results);
-    let smallHeadingCount=0;
+    let smallHeadingCount = 0;
     for (let i = 0; i < suitableRecipes.length - 1; i++) {
       if (suitableRecipes[i].noItemsList.length < 1){
         if (smallHeadingCount === 0){
@@ -130,10 +131,56 @@ app.get('/retseptid', (req, res) => {
   return res.send(response);
 });
 
+app.get('/otsing', (req, res) => {
+  let insideTheBox = '';
+  let suitableIngredients = recipes.getIngredients();
+  if (Object.keys(req.query).length > 0){
+    insideTheBox = req.query.t;
+    suitableIngredients = recipes.searchIngredients(ingredients, insideTheBox);
+  }
+  let response = `${header('Retseptide otsing')}<div class="sisu">
+  <div class="pealkiri">
+    <h1>Mis Sul juba kapis olemas on?</h1>
+  </div>
+  <div class="veerg1">
+    <div class="topnav">
+      <form class="search-container">
+        <span class="icon"><i class="fa fa-search icon fa-lg"></i></span>
+        <input autocomplete="off" type="text" id="myInput" onkeyup="otsinguFunktioon()" placeholder="Otsing..." name="search">
+      </form>
+    </div>
+
+    <div class="nupukast">
+      <div id="nupud">`;
+  for (let i = 0; i < suitableIngredients.length; i++) {
+    response
+    += `<button class="nupud" id="${suitableIngredients[i].id}">${suitableIngredients[i].Nimetus}</button>`;
+  }
+
+  response += `
+      </div>
+
+    <div class="first" id="first"></div>
+  </div>
+  <div class="veerg2">
+    <div class="vkast">
+      <div class="skast">
+        <div class="second" id="second">
+          <p>Sinu valikud:</p>
+          <a class="otsinupp">Otsi retsepti</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+${footer}`;
+  res.send(response);
+});
+
 app.get('/test', (req, res) => {
-  const results = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 22, 23, 26, 2, 72, 6];
-  const suitableRecipes = recipes.getSuitableRecipes(results);
-  res.send(suitableRecipes);
+  let insideTheBox='Ba';
+  let suitableIngredients = recipes.searchIngredients(ingredients, insideTheBox);
+  res.send(suitableIngredients);
 });
 
 app.get('/retseptid/:id', (req, res) => {
