@@ -2,6 +2,7 @@
 /* eslint-disable no-plusplus */
 const express = require('express');
 const path = require('path');
+const html = require('./html');
 
 const app = express(); // Calling express as a function
 
@@ -22,33 +23,11 @@ app.use(express.urlencoded({ extended: true }));
 recipes.initStudents(allRecipes);
 recipes.initIngredients(ingredients);
 
-
-// eslint-disable-next-line no-undef
-
-const header = (heading) => `
-<!DOCTYPE html>
-<html lang="et">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="/style.css" />
-    <title>${heading}</title>
-  </head>
-
-  <body>
-    <div class="vjoon" id="vj1"></div>
-    <div class="vjoon" id="vj2"></div>
-    <div class="vjoon" id="vj3"></div>
-    <div class="v2line">`;
-
-const footer = `
-  </div>
-  </body>
-  </html>`;
+app.get('/ingredients', (req, res) => res.send({ ingredients }));
 
 app.get('/retseptid', (req, res) => {
   const results = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 22, 23, 26, 2, 72, 6];
-  let response = `${header('Retseptid')}<div class="sisu">
+  let response = `${html.header('Retseptid')}<div class="sisu">
   <div class="lehepealkiri">
     <h1>Retseptid</h1>
   </div>`;
@@ -128,7 +107,7 @@ app.get('/retseptid', (req, res) => {
         </div>
         </div>
         </div>`;
-        response += `${footer}`;
+        response += `${html.footer}`;
       }
     }
   }
@@ -138,7 +117,7 @@ app.get('/retseptid', (req, res) => {
 app.get('/otsing', (req, res) => {
   let insideTheBox = '';
   let suitableIngredients = recipes.getIngredients();
-  let chosenIngredientsList = [
+  const chosenIngredientsList = [
     { id: 1, Nimetus: 'avokaado' },
     { id: 2, Nimetus: 'banaan' },
     { id: 3, Nimetus: 'basiilik/petersell' },
@@ -161,7 +140,7 @@ app.get('/otsing', (req, res) => {
     suitableIngredients = recipes.searchIngredients(ingredients, insideTheBox);
     // chosenIngredientsList=[];
   }
-  let response = `${header('Retseptide otsing')}<div class="sisu">
+  let response = `${html.header('Retseptide otsing')}<div class="sisu">
   <div class="pealkiri">
     <h1>Mis Sul juba kapis olemas on?</h1>
   </div>
@@ -169,7 +148,7 @@ app.get('/otsing', (req, res) => {
     <div class="topnav">
       <form class="search-container">
         <span class="icon"><i class="fa fa-search icon fa-lg"></i></span>
-        <input autocomplete="off" type="text" id="myInput" onkeyup="searchDirections" placeholder="Otsing..." name="search">
+        <input autocomplete="off" type="text" id="myInput" onkeyup="searchDirections()" placeholder="Otsing..." name="search">
       </form>
     </div>
 
@@ -177,7 +156,7 @@ app.get('/otsing', (req, res) => {
       <div id="nupud">`;
   for (let i = 0; i < suitableIngredients.length; i++) {
     response
-    += `<button class="nupud" id="${suitableIngredients[i].id}" onClick="addTOChosenList()">${suitableIngredients[i].Nimetus}</button>`;
+    += `<button class="nupud" id="${suitableIngredients[i].id}" onClick="addToChosenList('${suitableIngredients[i].id}')">${suitableIngredients[i].Nimetus}</button>`;
   }
 
   response += `
@@ -201,13 +180,13 @@ app.get('/otsing', (req, res) => {
     </div>
   </div>
 </div>
-${footer}`;
-  res.send(response);
+${html.footer}`;
+  return res.send(response);
 });
 
 app.get('/test', (req, res) => {
-  let insideTheBox='Ba';
-  let suitableIngredients = recipes.searchIngredients(ingredients, insideTheBox);
+  const insideTheBox = 'Ba';
+  const suitableIngredients = recipes.searchIngredients(ingredients, insideTheBox);
   res.send(suitableIngredients);
 });
 
@@ -218,7 +197,7 @@ app.get('/retseptid/:id', (req, res) => {
     return res.send('Sellist retsepti ei leidnud');
   }
   let response = `
-    ${header(recipe.retseptiNimi)}
+    ${html.header(recipe.retseptiNimi)}
     <div class="vkast3">
     <div class="skast3">
       <div class="nimekast">
@@ -245,7 +224,7 @@ app.get('/retseptid/:id', (req, res) => {
       </div>
     </div>
   </div>
-   ${footer}`;
+   ${html.footer}`;
   return res.send(response);
 });
 
