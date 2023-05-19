@@ -1,10 +1,16 @@
 # MidaToitu2.0
+## Projekti idee
+Tegemist on enda varasemalt loodud projekti edasiarendusega õppimise eesmärkidel. Projekti eesmärk on luua kasutajal võimalus valida toiduained, mis tal külmkapis olemas on ja programm pakub sobivaid retsepte kahes kategoorias - Need, mille tegemiseks on kasutajal kõik asjad olemas ja siis list retseptidest, kust kuni 3 komponenti on puudu. 
 
-Tegemist on enda varasemalt loodud projekti edasiarendusega õppimise eesmärkidel. Sellesse dokumenti on kirjutatud arendusprotsesside mõttekäik, nii nagu see juhtub. 
+Sellesse dokumenti on kirjutatud arendusprotsesside mõttekäik, nii nagu see juhtub.  
 MidaToitu:
-[Veebileht](https://ikarini.github.io/MidaToitu/ )
-[Projekt](https://github.com/IKarinI/MidaToitu)
+[Veebileht](https://ikarini.github.io/MidaToitu/)
+[Projekt](https://github.com/IKarinI/MidaToitu)  
 
+## Kuidas käivitada
+[Lae alla](https://blog.hubspot.com/website/download-from-github#repository) projekti sisaldav repositoorium Githubist. Ava see meelepärases koodiredaktoris, näiteks Visual Studio Code. Ava terminal ja mine selles projekti sisaldavasse kausta. Kirjuta käsureale `npm install`, et alla laadida kõik sõltuvused. Seejärel kirjuta käsureale `node app.js` ja kui kõik õnnestub plaanipäraselt peaks ilmuma terminali tekst `Listening on port: 5000`. Ava veebilehitseja ja kirjuta aadressiribale `http://localhost:5000/otsing`. Projekt on valmis kasutamiseks.  
+
+## Arenduse protsess ja märkmed
 ### Projektiplaan 1
 Panen paika esmase projektiplaani, et saaks hakata samm-sammult funktsionaalsusi ühest projektist üle tooma teise peale.  
 Kõigepealt tegelen projekti LK3 ja LK2
