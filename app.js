@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable space-before-blocks */
 /* eslint-disable no-plusplus */
 const express = require('express');
@@ -43,8 +44,8 @@ app.get('/retseptid', (req, res) => {
       <div class="retseptitabel2">
       <div class="vretseptikast" id="${suitableRecipes[i].id}">
       <div class="sretseptikast">
-      <img src="/${suitableRecipes[i].pilt}">
-      <div class="toiduNimetus">${suitableRecipes[i].retseptiNimi}</div>
+      <img src="/${suitableRecipes[i].image}">
+      <div class="toiduNimetus">${suitableRecipes[i].recipeName}</div>
       <button class="vaataRetsepti" id="${suitableRecipes[i].id}" onClick="location.href = 'retseptid/${suitableRecipes[i].id}';">Vaata Retsepti</button>
       </div>
       </div>
@@ -66,14 +67,14 @@ app.get('/retseptid', (req, res) => {
         response += `
           <div class="vretseptikast" id="${allRecipes[suitableRecipes[i].id].id}">
           <div class="sretseptikast">
-          <img src="/${allRecipes[suitableRecipes[i].id].pilt}">
-          <div class="toiduNimetus">${allRecipes[suitableRecipes[i].id].retseptiNimi}</div>
+          <img src="/${allRecipes[suitableRecipes[i].id].image}">
+          <div class="toiduNimetus">${allRecipes[suitableRecipes[i].id].recipeName}</div>
           <div class="retseptiAsjad">Koostisosad:<div class="koostisosad">`;
         for (let j = 0; j < allRecipes[suitableRecipes[i].id].koostisosad.length - 1; j++) {
           for (let k = 0; k < ingredients.length - 1; k++) {
             if (allRecipes[suitableRecipes[i].id].koostisosad[j] === ingredients[k].id){
               response += ` 
-                    ${ingredients[k].Nimetus},`;
+                    ${ingredients[k].ingredientName},`;
             }
           }
         }
@@ -94,12 +95,12 @@ app.get('/retseptid', (req, res) => {
           += `
           <div class="vretseptikast" id="${allRecipes[suitableRecipes[i].id].id}">
           <div class="sretseptikast">
-          <img src="/${allRecipes[suitableRecipes[i].id].pilt}">
-          <div class="toiduNimetus">${allRecipes[suitableRecipes[i].id].retseptiNimi}</div>
+          <img src="/${allRecipes[suitableRecipes[i].id].image}">
+          <div class="toiduNimetus">${allRecipes[suitableRecipes[i].id].recipeName}</div>
           <div class="retseptiAsjad">Sul on puudu:`;
         for (let j = 0; j < (suitableRecipes[i].missingItemslistLen) - 1; j++) {
           response += `
-              <div class="koostisosad">${suitableRecipes[i].koostisosadeNimekiri[j]}</div>`;
+              <div class="koostisosad">${suitableRecipes[i].ingredientsList[j]}</div>`;
         }
         response += `</div>
         <div class="vaataRetsepti" id="${allRecipes[suitableRecipes[i].id].id}">Vaata Retsepti</div>
@@ -118,22 +119,22 @@ app.get('/otsing', (req, res) => {
   let insideTheBox = '';
   let suitableIngredients = recipes.getIngredients();
   const chosenIngredientsList = [
-    { id: 1, Nimetus: 'avokaado' },
-    { id: 2, Nimetus: 'banaan' },
-    { id: 3, Nimetus: 'basiilik/petersell' },
-    { id: 4, Nimetus: 'hapukoor' },
-    { id: 5, Nimetus: 'jahu' },
-    { id: 7, Nimetus: 'kana' },
-    { id: 8, Nimetus: 'kartul' },
-    { id: 11, Nimetus: 'küüslauk' },
-    { id: 13, Nimetus: 'majonees/ketšup' },
-    { id: 14, Nimetus: 'muna' },
-    { id: 15, Nimetus: 'murulauk' },
-    { id: 18, Nimetus: 'porgand' },
-    { id: 22, Nimetus: 'riivsai' },
-    { id: 23, Nimetus: 'sai' },
-    { id: 27, Nimetus: 'sulajuust' },
-    { id: 30, Nimetus: 'vahukoor' },
+    { id: 1, ingredientName: 'avokaado' },
+    { id: 2, ingredientName: 'banaan' },
+    { id: 3, ingredientName: 'basiilik/petersell' },
+    { id: 4, ingredientName: 'hapukoor' },
+    { id: 5, ingredientName: 'jahu' },
+    { id: 7, ingredientName: 'kana' },
+    { id: 8, ingredientName: 'kartul' },
+    { id: 11, ingredientName: 'küüslauk' },
+    { id: 13, ingredientName: 'majonees/ketšup' },
+    { id: 14, ingredientName: 'muna' },
+    { id: 15, ingredientName: 'murulauk' },
+    { id: 18, ingredientName: 'porgand' },
+    { id: 22, ingredientName: 'riivsai' },
+    { id: 23, ingredientName: 'sai' },
+    { id: 27, ingredientName: 'sulajuust' },
+    { id: 30, ingredientName: 'vahukoor' },
   ];
   if (Object.keys(req.query).length > 0){
     insideTheBox = req.query.t;
@@ -156,7 +157,7 @@ app.get('/otsing', (req, res) => {
       <div id="nupud">`;
   for (let i = 0; i < suitableIngredients.length; i++) {
     response
-    += `<button class="nupud" id="${suitableIngredients[i].id}" onClick="addToChosenList('${suitableIngredients[i].id}')">${suitableIngredients[i].Nimetus}</button>`;
+    += `<button class="nupud" id="${suitableIngredients[i].id}" onClick="addToChosenList('${suitableIngredients[i].id}')">${suitableIngredients[i].ingredientName}</button>`;
   }
 
   response += `
@@ -173,7 +174,7 @@ app.get('/otsing', (req, res) => {
         </div>`;
   for (let j = 0; j < chosenIngredientsList.length - 1; j++){
     response += `      
-          <div class="nimekirjaElemendid">${chosenIngredientsList[j].Nimetus}</div>`;
+          <div class="nimekirjaElemendid">${chosenIngredientsList[j].ingredientName}</div>`;
   }
   response += `
       </div>
@@ -197,28 +198,28 @@ app.get('/retseptid/:id', (req, res) => {
     return res.send('Sellist retsepti ei leidnud');
   }
   let response = `
-    ${html.header(recipe.retseptiNimi)}
+    ${html.header(recipe.recipeName)}
     <div class="vkast3">
     <div class="skast3">
       <div class="nimekast">
-        <div class="nimi">${recipe.retseptiNimi}</div>
+        <div class="nimi">${recipe.recipeName}</div>
       </div>
       <div class="ylemine">
         <div class="peaminepilt">
-          <img src="/${recipe.pilt}" class="pilt"></div>
+          <img src="/${recipe.image}" class="pilt"></div>
         <div class="koostisosadValmistamine">
           <div class="koostisosadPea">
             <h3 class="pealkiri2">Koostisosad:</h3>`;
   // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < recipe.koostisosadeNimekiri.length - 1; i++) {
+  for (let i = 0; i < recipe.ingredientsList.length - 1; i++) {
     response += `
-            <div class="koostisosad">${recipe.koostisosadeNimekiri[i]}</div>`;
+            <div class="koostisosad">${recipe.ingredientsList[i]}</div>`;
   }
   response += `
           </div>
           <div class="valmistamiseKast">
             <h3 class="pealkiri2">Valmistamine:</h3>
-            <div class="valmistamine">${recipe.valmistamine}</div>
+            <div class="valmistamine">${recipe.preparationMethod}</div>
           </div>
         </div>
       </div>

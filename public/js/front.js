@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 let chosenList = [];
 let ingredients;
 

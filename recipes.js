@@ -74,16 +74,17 @@ function getSuitableRecipes(results) {
   return recipesToShow;
 }
 
-function searchIngredients(ingredients, query) {
+function searchIngredients(ingredientsSearch, query) {
   function condition(element) {
     let el = element.Nimetus;
     return el.toLowerCase().indexOf(query.toLowerCase()) !== -1;
   }
-  return ingredients.filter(condition);
+  return ingredientsSearch.filter(condition);
 }
 
 function searchDirections() {
-  let t = document.getElementById("myInput");
+  let t = document.getElementById('myInput');
+  // eslint-disable-next-line no-restricted-globals
   location.href = `/otsing?t=${t}`;
 }
 
